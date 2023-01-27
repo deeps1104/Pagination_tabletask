@@ -1,167 +1,190 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <title>PAGINATION WITH API</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 </head>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
-body {
-  width: 90%;
-  height: 100%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-
-}
-
-#tab
-   {
+  body {
+    width: 90%;
+    height: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
-    
-}
-table {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
+  }
 
-td,
-th {
-  border: 1px solid #000;
-  padding: 0.1rem;
+  #tab {
+    text-align: center;
 
-}
+  }
 
-tr:nth-child(odd) {
-  /* background-color: #2c3446; */
-  background-color: darkblue;
+  table {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
 
-}
-tr:nth-child(even) {
-  background-color: #464a52;
-}
+  td,
+  th {
+    border: 1px solid #000;
+    padding: 0.1rem;
 
-.btn-primary {
-  color: #000;
-  background-color: #495579;
-  border-color: #000;
-  cursor: pointer;
-  font-size: 18px;
-  text-decoration: none;
-transition: 0.4s;
-}
+  }
 
-.btn-primary:hover {
-  background: darkblue;
-  box-shadow: 0px 2px 20px 10px #6ca0dc;
-  color: #fff;
-}
+  tr:nth-child(odd) {
+    /* background-color: #2c3446; */
+    background-color: darkblue;
 
+  }
+
+  tr:nth-child(even) {
+    background-color: #464a52;
+  }
+
+  .btn-primary {
+    color: #000;
+    background-color: #495579;
+    border-color: #000;
+    cursor: pointer;
+    font-size: 18px;
+    text-decoration: none;
+    transition: 0.4s;
+  }
+
+  .btn-primary:hover {
+    background: darkblue;
+    box-shadow: 0px 2px 20px 10px #6ca0dc;
+    color: #fff;
+  }
 </style>
+
 <body style="background-color:#1f2739;">
- <div >
-  <div class="main mt-5">
-    <h2 style="color: #fff;">RESPONSIVE PAGINATION TABLE</h2>
-   <div class="row mx-5" style="width: 90%; ">
-    <input type="search" class="form-control" aria-describedby="emailHelp" placeholder="Search Users" id="myInput" style="word-spacing: 2px;" />
-   </div>
-  <div class="container table-responsive py-4">
-    <table class="table" style="background-color: #fff; width: 100%;">
-      <thead style="color: #4ab9ee;">
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Message</th>
-          
-        </tr>
-      <tbody id="users" style="color: #fff; font-size: 16px;" >
-      </tbody>
-    </table>
-  </div>
+  <div class="main mt-3">
     <div>
-      <nav aria-label="" id="example">
+      <h2 style="color: #fff;">RESPONSIVE PAGINATION TABLE </h2>
+      <div class="row mx-5" style="width: 90%; ">
+        <input type="search" class="form-control mt-3" aria-describedby="emailHelp" placeholder="Search Users"
+          id="value1" style="word-spacing: 2px;" onchange="findSearchValue()" />
+          
+      </div>
+      <div class="container table-responsive py-4">
+        <table class="table" style="background-color: #fff; width: 100%;" id="tab1">
+          <thead style="color: #4ab9ee;">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Message</th>
+            </tr>
+          <tbody id="users" style="color: #fff; font-size: 16px;">
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <nav aria-label="" id="example">
           <ul class="pagination" style="list-style: none;display: flex; justify-content: center;">
-            <li class="page-item" onclick="getFirstPage()"><button class="btn btn-primary" href="#" id="first">Previous</button></li>
+            <li class="page-item" onclick="getFirstPage()"><button class="btn btn-primary" href="#"
+                id="first">Previous</button></li>
             <li id="numbers"></li>
-            <li class="page-item" onclick="getFirstPage()"><button class="btn btn-primary" href="#" id="last">Next</button></li>
+            <li class="page-item" onclick="getFirstPage()"><button class="btn btn-primary" href="#"
+                id="last">Next</button></li>
           </ul>
         </nav>
-  </div>  
- </div>
- </div>
+      </div>
+    </div>
+  </div>
   <script>
-    let data=[];
-let n;
-let pageNum;
-let start = 0;
-let end = 8;
-window.onload = getData();
-function getData() {
-    fetch("https://jsonplaceholder.typicode.com/comments")
-      .then((response) => response.json())
-      .then((json) => {
-        for (let i = 0; i < json.length; i++) {
-          data.push(json[i])   
-        }
-        showdata()
-      })
-      
-    }
+    let data = [];
+    let n;
+    let pageNum;
+    let start = 0;
+    let end = 8;
+    window.onload = getData();
+    function getData() {
+      fetch("https://jsonplaceholder.typicode.com/comments")
+        .then((response) => response.json())
+        .then((json) => {
+          for (let i = 0; i < json.length; i++) {
+            data.push(json[i])
+          }
+          showdata()
+        })
 
-    function showdata(){
-          if(data.length!==0){
-            let tabData = ""
-            n = data.slice(start,end)
-            for(let i = 0 ; i<n.length; i++){
-              tabData = tabData + `<tr>
+    }
+    function showdata() {
+      if (data.length !== 0) {
+        let tabData = ""
+        n = data.slice(start, end)
+        for (let i = 0; i < n.length; i++) {
+          tabData = tabData + `<tr>
               <td style="color:#c5586c;">${n[i].id}</td>
               <td >${n[i].name} </td>
               <td >${n[i].email}</td>
               <td >${n[i].body}</td>
               </tr>`
-            }
+        }
 
-            document.getElementById("users").innerHTML = tabData;
-            pageNum = 35;
-            let Count  = Math.ceil(data.length /pageNum)
-            let m = "";
-            for (let index = 0; index<Count; index++) {
-                  m += `<button onclick="newData()" class="btn btn-primary mx-1" id="new">${index+1}</button>`
-                }
-                document.getElementById("numbers").innerHTML= m  
-              }
+        document.getElementById("users").innerHTML = tabData;
+        pageNum = 35;
+        let Count = Math.ceil(data.length / pageNum)
+        let m = "";
+        for (let index = 0; index < Count; index++) {
+          m += `<button onclick="newData()" class="btn btn-primary mx-1" id="new">${index + 1}</button>`
+        }
+        document.getElementById("numbers").innerHTML = m
+      }
+    }
 
-}
-
-    function getFirstPage (){
-      if(event.target.id == "first"){
-        start = start+ pageNum
+    function getFirstPage() {
+      if (event.target.id == "first") {
+        start = start + pageNum
         end = end + pageNum
       }
-      if(event.target.id == "last"){
-        start = start- pageNum
+      if (event.target.id == "last") {
+        start = start - pageNum
         end = end - pageNum
       }
       showdata()
     }
+    function newData() {
+      let getdata = parseInt(event.target.innerHTML)
+      start = (getdata * pageNum) - pageNum
+      end = (getdata * pageNum)
+      showdata()
+    }
 
-    function newData()
-      {
-        let getdata= parseInt(event.target.innerHTML)
-        start= (getdata*pageNum)-pageNum
-        end = (getdata*pageNum)
-        showdata()
+    function findSearchValue() {
+      let value = document.getElementById("value1").value.toLowerCase()
+      console.log(value)
+      let table1 = document.getElementsByTagName("Table")[0]
+      console.log(table1)
+      let tr = table1.getElementsByTagName("tr");
+      for (let i = 0; i < tr.length; i++) {
+        let td = tr[i].getElementsByTagName("td")[1]
+        if (td) {
+          let value2 = td.innerText;
+          console.log(value2)
+          if (value2.toLowerCase().indexOf(value) > -1) {
+            tr[i].style.display = "";
+          }
+          else {
+            tr[i].style.display = "none";
+          }
+        }
       }
+    }
+
+
+    
 
   </script>
 </body>
