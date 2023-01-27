@@ -50,8 +50,7 @@ function getData() {
       }
       showdata()
     }
-
-
+    
     function newData()
       {
         let getdata= parseInt(event.target.innerHTML)
@@ -59,56 +58,43 @@ function getData() {
         end = (getdata*pageNum)
         showdata()
       }
-
-     function findName(){
-       input = document.getElementById('myInput');
-      let p = input.value.toLowerCase();
-     console.log(p)
-    //  let q = data.filter(function(user)
-    //  {
-    //    user = user.title.toLowerCase()
-    //    console.log(user)
-    //    return user.indexOf(p) > -1;  
-    //  })
-    //   input.addEventListener('keyup', q);
-   }   
-
-
- 
-  //  for (var i = 0, row; row = table.rows[i]; i++) {    
-  //       console.log(i)  
-  //  } 
+      //  function findName(){
+      //    input = document.getElementById('myInput');
+      //   let p = input.value.toLowerCase();
+      //   console.log(p)
+       
+      //  let q = data.filter(function(user)
+      //  {
+      //    user = user.title.toLowerCase()
+      //    console.log(user)
+      //    return user.indexOf(p) > -1;  
+      //  })
+      //   input.addEventListener('keyup', q);
+    //  }   
 
 
-
-  //  function liveSearch() {
-  //   // Locate the card elements
-  //   let cards = document.querySelectorAll('.cards')
-  //   // Locate the search input
-  //   let search_query = document.getElementById("searchbox").value;
-  //   // Loop through the cards
-  //   for (var i = 0; i < cards.length; i++) {
-  //     // If the text is within the card...
-  //     if(cards[i].innerText.toLowerCase()
-  //       // ...and the text matches the search query...
-  //       .includes(search_query.toLowerCase())) {
-  //         // ...remove the `.is-hidden` class.
-  //         cards[i].classList.remove("is-hidden");
-  //     } else {
-  //       // Otherwise, add the class.
-  //       cards[i].classList.add("is-hidden");
-  //     }
-  //   }
-  //
-  function newt(){
-    var o1 = document.getElementById("n1");
-    debugger 
-o1.hasChildNodes(0)
-
+function findInputSearch(){
+let filter = document.getElementById("myInput").value.toLowerCase();
+let tab2 = document.getElementsByTagName("table")[0];
+// console.log(tab2);
+let tr = tab2.getElementsByTagName("tr");
+for(let i=0; i<tr.length; i++){
+  let td = tr[i].getElementsByTagName("td")[2];
+  if(td){
+     let tvalue = td.textContent;
+     if(tvalue.toLowerCase().indexOf(filter)>-1){
+      tr[i].style.display = "";
+     }
+     else{
+      tr[i].style.display = "none";
+     }
   }
-    
-  
-      
+}
+}
 
+const dragArea = document.querySelector('#users');
+new Sortable(dragArea, {
+  animation: 350,
+  orderable: true,
 
-
+});

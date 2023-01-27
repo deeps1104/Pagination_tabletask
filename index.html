@@ -5,24 +5,22 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Pagination Table in JS</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js" integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 </head>
 <body style="background-color:#1f2739;">
- <div >
-  <div class="main mt-5">
+ <div class="main mt-3">
+  <div>
     <h2 style="color: #fff;">RESPONSIVE PAGINATION TABLE</h2>
-    <button onclick="newt()">okkkkkkk</button>
-    <p id="demo"></p>
-   <div class="row mx-5" style="width: 90%; ">
-    <input type="search" class="form-control" aria-describedby="emailHelp" placeholder="Search Users" id="myInput" style="word-spacing: 2px;" onchange="findName()"/>
-
+   <div class="row mx-3">
+    <input type="search" class="form-control mt-3" aria-describedby="emailHelp" placeholder="Search by Title" id="myInput" style="word-spacing: 2px;" onchange="findInputSearch()"/>
    </div>
-   <table class="table" style="background-color: #fff;" id="n1">
-  <div class="container table-responsive py-4">
+   <table class="table" style="background-color: #fff;" id="myTable">
+  <div class="container table-responsive py-3">
       <thead style="color: #4ab9ee;">
-        <tr >
+        <tr>
           <th scope="col">ID</th>
           <th scope="col">Title</th>
           <th scope="col">Message</th>
